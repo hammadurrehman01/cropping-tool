@@ -1,17 +1,28 @@
-import React from 'react'
+import React from "react";
+import "@/app/styles/footer.css";
+import Image from "next/image";
 
-const Footer = () => {
+const Footer: React.FC = () => {
     return (
-        <footer className="bg-slate-800 border-t border-slate-700 px-4 py-3 text-sm text-slate-400">
-            <div className="flex items-center justify-between">
-                <span>https://steamartworkhub.com</span>
-                <div className="flex items-center space-x-4">
-                    <span>© 2025 🎮 Artwork Hub</span>
-                    <span>• Cookies • Discord • Contact • About • Privacy • Language •</span>
-                </div>
+        <footer className="footer">
+            <div className="footer-upper">
+                <span className="">© 2025</span>
+                <Image src="/logo.svg" alt="logo" height={15} width={15} />
+                Artwork Hub
+            </div>
+            <div className="footer-links">
+                <a href="#">Cookies</a>
+                <a href="#">Discord</a>
+                <a href="#">Contact</a>
+                <a href="#">About</a>
+                <a href="#">Privacy</a>
+                <select className="language-dropdown" >
+                    <option value="en" hidden>Language</option>
+                    <option value="en">English</option>
+                </select>
             </div>
         </footer>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;
