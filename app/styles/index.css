@@ -74,17 +74,20 @@
 
 .input {
   flex: 1;
-  background-color: #334155;
-  border-color: #475569;
+  background-color: #080808;
+  border: none;
+  height: 30px;
+  border-radius: 2px;
   color: #ffffff;
 }
 
 .upload_btn {
-  border-color: #475569;
-}
+  border: none;
+  border-radius: 2px;
+  height: 30px;
+  width: 25px;
+  background-color: #080808;
 
-.upload_btn:hover {
-  background-color: #334155;
 }
 
 .splitting_btn_div {
@@ -172,6 +175,7 @@
   color: #848484;
   cursor: pointer;
 }
+
 .canvas-control-icons:hover {
   color: white;
 }
