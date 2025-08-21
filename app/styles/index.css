@@ -9,7 +9,7 @@
 }
 
 .wrapper_div {
-  width: 75%;
+  width: 780px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -29,7 +29,7 @@
 }
 
 .preview_image {
-  width: 164px;
+  width: 200px;
   height: 164px;
   border-width: 3px;
   border-color: #06b6d4;
@@ -107,15 +107,16 @@
 
 .canvas_outer_div {
   position: relative;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .canvas_wrapper {
-  background-color: #1e293b;
-  width: 95%;
-  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.438);
+  width: 100%;
+  border-radius: 2%;
   padding: 1rem;
   position: relative;
+  /* height: 730px; */
 }
 
 /*  */
@@ -145,4 +146,32 @@
 
 .resize_handler:hover {
   background-color: #64748b;
+}
+
+
+.canvas-control-btn-div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  background-color: #080808;
+  padding: 8px 10px 8px 10px
+}
+
+
+
+.canvas-control-btn-div>*:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.canvas-control-icons {
+  width: 16px;
+  height: 16px;
+  color: #848484;
+  cursor: pointer;
+}
+.canvas-control-icons:hover {
+  color: white;
 }

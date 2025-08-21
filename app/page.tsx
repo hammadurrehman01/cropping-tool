@@ -25,7 +25,7 @@ export default function CroppingTool() {
     "/bg-image-default.jpg"
   );
   const [cropMode, setCropMode] = useState<CropMode>("whole");
-  const [canvasHeight, setCanvasHeight] = useState(400);
+  const [canvasHeight, setCanvasHeight] = useState(700);
   const [isDragging, setIsDragging] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -357,36 +357,15 @@ export default function CroppingTool() {
           <div className="canvas_outer_div">
             <div className="canvas_wrapper">
               {/* Canvas Controls */}
-              <div className="absolute top-4 right-4 flex items-center space-x-2 z-10">
-                <Button
-                  onClick={exportImage}
-                  variant="outline"
-                  size="icon"
-                  className="bg-slate-700 border-slate-600 hover:bg-slate-600"
-                >
-                  <Download className="w-4 h-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="bg-slate-700 border-slate-600 hover:bg-slate-600"
-                >
-                  <Maximize2 className="w-4 h-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="bg-slate-700 border-slate-600 hover:bg-slate-600"
-                >
-                  <Star className="w-4 h-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="bg-slate-700 border-slate-600 hover:bg-slate-600"
-                >
-                  <X className="w-4 h-4" />
-                </Button>
+              <div className="canvas-control-btn-div">
+
+                <Download onClick={exportImage} className="canvas-control-icons" />
+
+                <Maximize2 className="canvas-control-icons" />
+
+                <Star className="canvas-control-icons" />
+
+                <X className="canvas-control-icons" />
               </div>
 
               {/* Canvas */}
