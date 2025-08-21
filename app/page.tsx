@@ -60,8 +60,7 @@ export default function CroppingTool() {
 
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = imageUrl || currentImage; // same root bg
-    // img.src = "/bg-image-default.jpg"; // same root bg
+    img.src = imageUrl || currentImage;
 
     img.onload = () => {
       canvas.width = canvas.offsetWidth;
@@ -69,51 +68,56 @@ export default function CroppingTool() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // -------- Get root background image alignment --------
-      const root = document.querySelector(".main_div") as HTMLElement; // 👈 root div jahan bg laga hai
+      // -------- Root div & canvas rects --------
+      const root = document.querySelector(".main_div") as HTMLElement;
       const rootRect = root.getBoundingClientRect();
       const canvasRect = canvas.getBoundingClientRect();
 
+      // Background-size: cover (tumne root me wahi diya hai)
       const imgRatio = img.width / img.height;
       const rootRatio = rootRect.width / rootRect.height;
 
-      let bgDrawWidth, bgDrawHeight, bgOffsetX, bgOffsetY;
+      let drawWidth, drawHeight, offsetX, offsetY;
 
       if (rootRatio > imgRatio) {
-        // Root is wider → fit height
-        bgDrawHeight = rootRect.height;
-        bgDrawWidth = img.width * (rootRect.height / img.height);
-        bgOffsetX = (rootRect.width - bgDrawWidth) / 2;
-        bgOffsetY = 0;
+        // root wider → fit height
+        drawHeight = rootRect.height;
+        drawWidth = img.width * (rootRect.height / img.height);
+        offsetX = (rootRect.width - drawWidth) / 2;
+        offsetY = 0;
       } else {
-        // Root is taller → fit width
-        bgDrawWidth = rootRect.width;
-        bgDrawHeight = img.height * (rootRect.width / img.width);
-        bgOffsetX = 0;
-        bgOffsetY = (rootRect.height - bgDrawHeight) / 2;
+        // root taller → fit width
+        drawWidth = rootRect.width;
+        drawHeight = img.height * (rootRect.width / img.width);
+        offsetX = 0;
+        offsetY = (rootRect.height - drawHeight) / 2;
       }
 
-      // -------- Calculate relative offset for canvas --------
-      const relativeX = canvasRect.left - rootRect.left;
-      const relativeY = canvasRect.top - rootRect.top;
+      // -------- Canvas ka relative offset --------
+      const relX = canvasRect.left - rootRect.left;
+      const relY = canvasRect.top - rootRect.top;
+
+      // -------- Source crop (only visible portion) --------
+      const sx = (relX - offsetX) * (img.width / drawWidth);
+      const sy = (relY - offsetY) * (img.height / drawHeight);
+      const sWidth = canvas.width * (img.width / drawWidth);
+      const sHeight = canvas.height * (img.height / drawHeight);
 
       ctx.drawImage(
         img,
-        // Source cropping (aligned with root bg)
-        (relativeX - bgOffsetX) * (img.width / bgDrawWidth),
-        (relativeY - bgOffsetY) * (img.height / bgDrawHeight),
-        canvas.width * (img.width / bgDrawWidth), // <- source width only
-        canvas.height * (img.height / bgDrawHeight), // <- source height only
-        // Destination: always fit canvas (no distortion)
+        sx,
+        sy,
+        sWidth,
+        sHeight,
         0,
         0,
         canvas.width,
         canvas.height
       );
 
-      // -------- Draw crop lines --------
-      ctx.strokeStyle = "#1a231f";
-      ctx.lineWidth = 4;
+      // -------- Crop lines --------
+      ctx.strokeStyle = "#000000e5";
+      ctx.lineWidth = 6;
 
       if (cropMode === "split2") {
         const splitPoint = canvas.width * 0.85;
@@ -132,6 +136,9 @@ export default function CroppingTool() {
       }
     };
   }, [cropMode, canvasHeight, currentImage, imageUrl]);
+
+
+
 
   useEffect(() => {
     drawImageOnCanvas();
@@ -331,7 +338,7 @@ export default function CroppingTool() {
                 <div className="splitting_btn_div">
                   <Button
                     onClick={() => setCropMode("whole")}
-                    variant={cropMode === "whole" ? "default" : "outline"}
+                    variant={"outline"}
                     size="icon"
                     className="splitting_btn"
                   >
@@ -339,7 +346,7 @@ export default function CroppingTool() {
                   </Button>
                   <Button
                     onClick={() => setCropMode("split2")}
-                    variant={cropMode === "split2" ? "default" : "outline"}
+                    variant={"outline"}
                     size="icon"
                     className="splitting_btn"
                   >
@@ -347,7 +354,7 @@ export default function CroppingTool() {
                   </Button>
                   <Button
                     onClick={() => setCropMode("split5")}
-                    variant={cropMode === "split5" ? "default" : "outline"}
+                    variant={"outline"}
                     size="icon"
                     className="splitting_btn"
                   >
@@ -374,7 +381,7 @@ export default function CroppingTool() {
                 <canvas
                   ref={canvasRef}
                   className="canvas"
-                  style={{ height: `${canvasHeight}px` }}
+                  style={{ height: `${canvasHeight}px`, }}
                 />
 
                 {/* Resize Handle */}
