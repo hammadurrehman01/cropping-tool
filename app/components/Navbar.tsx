@@ -1,29 +1,28 @@
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
+import "@/app/styles/navbar.css";
 
 const Navbar = () => {
   return (
-    <nav className="bg-slate-800 border-b border-slate-700 px-4 py-3 fixed top-0 w-full z-[99999]">
-      <div className="flex items-center gap-3">
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center space-x-2">
+    <nav className="main_nav">
+      <div className="sub_nav">
+        <div className="left_div">
+          <div className="logo">
             <Image src="/logo.svg" alt="logo" height={30} width={30} />
           </div>
-          <div className="flex items-center space-x-6 text-sm">
-            <span className="text-cyan-400 cursor-pointer">Home</span>
-            <div className="flex items-center space-x-1 cursor-pointer">
+          <div className="nav_items">
+            <span className="home">Home</span>
+            <div className="tools">
               <span>Tools</span>
               <ChevronDown className="w-4 h-4" />
             </div>
-            <div className="flex items-center space-x-1 cursor-pointer">
+            <div className="more">
               <span>More</span>
               <ChevronDown className="w-4 h-4" />
             </div>
           </div>
         </div>
-        <div className="text-cyan-400 font-bold text-lg">
-          Order Best Steam and Discord Design
-        </div>
+        <div className="right_div">Order Best Steam and Discord Design</div>
       </div>
     </nav>
   );

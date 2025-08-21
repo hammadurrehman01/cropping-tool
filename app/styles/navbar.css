@@ -1,0 +1,77 @@
+.main_nav {
+  background-color: #1e293b;
+  border-bottom: 1px solid #334155;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
+}
+
+.sub_nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.left_div {
+  display: flex;
+  align-items: center;
+}
+
+.left_div > *:not(:last-child) {
+  margin-right: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo > *:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.nav_items {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.nav_items > *:not(:last-child) {
+  margin-right: 1.5rem;
+}
+
+.home {
+  color: #22d3ee;
+  cursor: pointer;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tools > *:not(:last-child) {
+  margin-right: 0.25rem;
+}
+
+.more {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.more > *:not(:last-child) {
+  margin-right: 0.25rem;
+}
+
+.right_div {
+  color: #22d3ee;
+  font-weight: 700;
+  font-size: 1.125rem;
+}

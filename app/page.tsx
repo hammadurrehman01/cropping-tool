@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-
+import "@/app/styles/index.css";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -70,7 +69,7 @@ export default function CroppingTool() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // -------- Get root background image alignment --------
-      const root = document.querySelector(".min-h-screen") as HTMLElement; // 👈 root div jahan bg laga hai
+      const root = document.querySelector(".main_div") as HTMLElement; // 👈 root div jahan bg laga hai
       const rootRect = root.getBoundingClientRect();
       const canvasRect = canvas.getBoundingClientRect();
 
@@ -272,7 +271,7 @@ export default function CroppingTool() {
 
   return (
     <div
-      className={`min-h-screen text-white bg-cover bg-center relative py-10`}
+      className="main_div"
       style={{
         backgroundImage: `url(${currentImage || "/bg-image-default.jpg"})`,
         backgroundAttachment: "fixed",
@@ -281,11 +280,11 @@ export default function CroppingTool() {
       {/* Navigation */}
       <Navbar />
 
-      <div className="w-[60%] mx-auto flex gap-3 mt-10 bg-gradient-to-b from-[#001820] to-[#181818ca] px-6 py-10">
+      <div className="wrapper_div">
         <div>
-          <div className="flex items-center gap-9 ">
+          <div className="upper_div">
             <div
-              className="w-[164px] h-[164px] border-3 border-cyan-500 z-50 relative"
+              className="preview_image"
               style={{
                 backgroundImage: `url(${
                   currentImage || "/bg-image-default.jpg"
@@ -297,25 +296,25 @@ export default function CroppingTool() {
             />
 
             <div>
-              <h1 className="font-thin text-2xl mb-2">Background Cropper</h1>
-              <p className="text-primary text-sm mb-4">Ver. 1.1</p>
-              <p className="text-slate-300 mb-1">
+              <h1 className="main_heading">Background Cropper</h1>
+              <p className="sub_heading">Ver. 1.1</p>
+              <p className="input_heading">
                 Paste your background link or upload your background below.
               </p>
 
-              <div className="flex items-center space-x-2 mb-2">
+              <div className="input_div">
                 <Input
                   type="text"
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
                   placeholder="Enter image URL"
-                  className="flex-1 bg-slate-700 border-slate-600 text-white"
+                  className="input"
                 />
                 <Button
                   onClick={() => fileInputRef.current?.click()}
                   variant="outline"
                   size="icon"
-                  className="border-slate-600 hover:bg-slate-700"
+                  className="upload_btn"
                 >
                   <Upload className="w-4 h-4" />
                 </Button>
@@ -324,40 +323,40 @@ export default function CroppingTool() {
                   type="file"
                   accept="image/*"
                   onChange={handleFileUpload}
-                  className="hidden"
+                  style={{ display: "none" }}
                 />
               </div>
 
-              <div className="flex items-center space-x-2">
+              <div className="splitting_btn_div">
                 <Button
                   onClick={() => setCropMode("whole")}
                   variant={cropMode === "whole" ? "default" : "outline"}
                   size="icon"
-                  className="border-slate-600"
+                  className="splitting_btn"
                 >
-                  <Square className="w-4 h-4" />
+                  <Square className="splitting_icon" />
                 </Button>
                 <Button
                   onClick={() => setCropMode("split2")}
                   variant={cropMode === "split2" ? "default" : "outline"}
                   size="icon"
-                  className="border-slate-600"
+                  className="splitting_btn"
                 >
-                  <Columns2 className="w-4 h-4" />
+                  <Columns2 className="splitting_icon" />
                 </Button>
                 <Button
                   onClick={() => setCropMode("split5")}
                   variant={cropMode === "split5" ? "default" : "outline"}
                   size="icon"
-                  className="border-slate-600"
+                  className="splitting_btn"
                 >
-                  <Columns4 className="w-4 h-4" />
+                  <Columns4 className="splitting_icon" />
                 </Button>
               </div>
             </div>
           </div>
-          <div className="relative mt-8">
-            <div className="bg-slate-800 w-[95%] rounded-lg p-4 relative">
+          <div className="canvas_outer_div">
+            <div className="canvas_wrapper">
               {/* Canvas Controls */}
               <div className="absolute top-4 right-4 flex items-center space-x-2 z-10">
                 <Button
@@ -394,15 +393,12 @@ export default function CroppingTool() {
               {/* Canvas */}
               <canvas
                 ref={canvasRef}
-                className="w-full border border-slate-600 rounded cursor-pointer"
+                className="canvas"
                 style={{ height: `${canvasHeight}px` }}
               />
 
               {/* Resize Handle */}
-              <div
-                className="absolute bottom-0 left-0 right-0 h-2 cursor-ns-resize bg-slate-600 hover:bg-slate-500 rounded-b"
-                onMouseDown={handleMouseDown}
-              />
+              <div className="resize_handler" onMouseDown={handleMouseDown} />
             </div>
           </div>
         </div>
