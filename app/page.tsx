@@ -281,14 +281,13 @@ export default function CroppingTool() {
       <Navbar />
 
       <div className="wrapper_div">
-        <div>
+        <div style={{ width: "70%" }}>
           <div className="upper_div">
             <div
               className="preview_image"
               style={{
-                backgroundImage: `url(${
-                  currentImage || "/bg-image-default.jpg"
-                })`,
+                backgroundImage: `url(${currentImage || "/bg-image-default.jpg"
+                  })`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundAttachment: "fixed",
@@ -403,7 +402,9 @@ export default function CroppingTool() {
           </div>
         </div>
 
-        <SideBar exportImage={exportImage} />
+        <div style={{ width: "30%" }}>
+          <SideBar exportImage={exportImage} />
+        </div>
       </div>
     </div>
   );

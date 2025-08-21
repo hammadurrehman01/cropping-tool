@@ -9,7 +9,7 @@ interface Props {
 const SideBar = ({ exportImage }: Props) => {
   return (
     <div className="outer_div">
-      <div className="upper_div">
+      <div className="upper_div_sidebar">
         <div className="top_heading">
           <span className="level_heading">Level</span>
           <div className="level">10</div>
@@ -30,13 +30,15 @@ const SideBar = ({ exportImage }: Props) => {
       </div>
       <div className="option-btn_outer">
         <div className="">
-          <Button className="donate-btn">Donate</Button>
+          <div className="option_btn_div">
+            <Button className="donate-btn">Donate</Button>
 
-          <Button className="profile-btn">Profile Backgrounds</Button>
+            <Button className="common-btn">Profile Backgrounds</Button>
 
-          <Button className="upload-codes-btn">Upload Codes</Button>
+            <Button className="common-btn">Upload Codes</Button>
 
-          <Button className="custom-button">Changelog</Button>
+            <Button className="common-btn">Changelog</Button>
+          </div>
           {/* Promotional Banner */}
           <div className="promotional-banner">
             <h3 className="promotional-banner-heading">

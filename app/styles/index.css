@@ -4,12 +4,12 @@
   background-size: cover;
   background-position: center;
   position: relative;
-  padding-top: 2.5rem;
+  /* padding-top: 2.5rem; */
   padding-bottom: 2.5rem;
 }
 
 .wrapper_div {
-  width: 60%;
+  width: 75%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -42,6 +42,7 @@
   font-size: 1.5rem;
   line-height: 2rem;
   margin-bottom: 0.5rem;
+  text-align: left;
 }
 
 .sub_heading {
@@ -49,11 +50,16 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   margin-bottom: 1rem;
+  text-align: left;
+
 }
 
 .input_heading {
-  color: #cbd5e1;
+  color: #898989;
+  font-size: 13px;
   margin-bottom: 0.25rem;
+  text-align: left;
+
 }
 
 .input_div {
@@ -62,7 +68,7 @@
   margin-bottom: 0.5rem;
 }
 
-.input_div > *:not(:last-child) {
+.input_div>*:not(:last-child) {
   margin-right: 0.5rem;
 }
 
@@ -86,7 +92,7 @@
   align-items: center;
 }
 
-.splitting_btn_div > *:not(:last-child) {
+.splitting_btn_div>*:not(:last-child) {
   margin-right: 0.5rem;
 }
 
