@@ -303,7 +303,7 @@ export default function CroppingTool() {
                 }}
               />
 
-              <div>
+              <div style={{flex: "1"}}>
                 <h1 className="main_heading">Background Cropper</h1>
                 <p className="sub_heading">Ver. 1.1</p>
                 <p className="input_heading">
@@ -324,7 +324,7 @@ export default function CroppingTool() {
                     size="icon"
                     className="upload_btn"
                   >
-                    <Upload className="w-4 h-4" />
+                    <Upload className="upload_icon" />
                   </Button>
                   <input
                     ref={fileInputRef}

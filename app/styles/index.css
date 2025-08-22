@@ -9,7 +9,7 @@
 }
 
 .wrapper_div {
-  width: 780px;
+  width: 1000px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -29,7 +29,7 @@
 }
 
 .preview_image {
-  width: 200px;
+  width: 164px;
   height: 164px;
   border-width: 3px;
   border-color: #06b6d4;
@@ -51,7 +51,6 @@
   line-height: 1.25rem;
   margin-bottom: 1rem;
   text-align: left;
-
 }
 
 .input_heading {
@@ -59,16 +58,16 @@
   font-size: 13px;
   margin-bottom: 0.25rem;
   text-align: left;
-
 }
 
 .input_div {
+  width: 100%;
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
 }
 
-.input_div>*:not(:last-child) {
+.input_div > *:not(:last-child) {
   margin-right: 0.5rem;
 }
 
@@ -87,15 +86,17 @@
   height: 30px;
   width: 25px;
   background-color: #080808;
-
 }
+
+.upload_icon {
+  color: #888888;}
 
 .splitting_btn_div {
   display: flex;
   align-items: center;
 }
 
-.splitting_btn_div>*:not(:last-child) {
+.splitting_btn_div > *:not(:last-child) {
   margin-right: 0.5rem;
 }
 
@@ -107,6 +108,7 @@
 .splitting_icon {
   width: 1rem;
   height: 1rem;
+  color: #888888;
 }
 
 .canvas_outer_div {
@@ -130,7 +132,7 @@
   border: 1px solid #475569;
   border-radius: 0.25rem;
   cursor: pointer;
-} 
+}
 
 .resize_handler {
   position: absolute;
@@ -148,7 +150,6 @@
   background-color: #64748b;
 }
 
-
 .canvas-control-btn-div {
   position: absolute;
   top: 0;
@@ -157,12 +158,10 @@
   align-items: center;
   z-index: 10;
   background-color: #080808;
-  padding: 8px 10px 8px 10px
+  padding: 8px 10px 8px 10px;
 }
 
-
-
-.canvas-control-btn-div>*:not(:last-child) {
+.canvas-control-btn-div > *:not(:last-child) {
   margin-right: 0.5rem;
 }
 

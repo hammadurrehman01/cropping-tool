@@ -76,16 +76,18 @@
 }
 
 .settings-btn {
-  border: 1px solid #475569;
   background-color: #000000;
   color: #6b7280;
   border-radius: 0.125rem;
+  font-size: 16px;
 }
 
 .export-btn {
   background-color: #0e2a47;
   color: #22d3ee;
   border-radius: 0.125rem;
+  font-size: 16px;
+
 }
 
 .export-btn:hover {
