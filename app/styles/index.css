@@ -6,7 +6,7 @@
 }
 
 .wrapper_div {
-  width: 1000px;
+  width: 770px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -14,6 +14,7 @@
   margin-top: 2.5rem;
   background-image: linear-gradient(to bottom, #001820, #181818ca);
   padding: 2.5rem 1.5rem;
+  padding-bottom: 100px;
 }
 
 .upper_div {
@@ -23,14 +24,12 @@
 }
 
 .preview_image {
-  width: 164px;
-  height: 164px;
+  width: 154px;
+  height: 154px;
   border-width: 3px;
   border-color: #06b6d4;
   z-index: 50;
   position: relative;
-
-  /* ✅ make preview behave like cover */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -66,7 +65,7 @@
   margin-bottom: 0.5rem;
 }
 
-.input_div > *:not(:last-child) {
+.input_div>*:not(:last-child) {
   margin-right: 0.5rem;
 }
 
@@ -96,7 +95,7 @@
   align-items: center;
 }
 
-.splitting_btn_div > *:not(:last-child) {
+.splitting_btn_div>*:not(:last-child) {
   margin-right: 0.5rem;
 }
 
@@ -119,7 +118,6 @@
 .canvas_wrapper {
   background-color: #00000070;
   width: 100%;
-  border-radius: 2%;
   padding: 1rem;
   position: relative;
 }
@@ -129,11 +127,11 @@
   height: 100%;
   display: block;
   border: 1px solid #475569;
-  border-radius: 0.25rem;
   cursor: pointer;
 
   /* ✅ make sure canvas looks sharp */
-  object-fit: cover; /* acts if image used as <img>, but we keep for consistency */
+  object-fit: cover;
+  /* acts if image used as <img>, but we keep for consistency */
 }
 
 .resize_handler {
@@ -163,7 +161,7 @@
   padding: 8px 10px;
 }
 
-.canvas-control-btn-div > *:not(:last-child) {
+.canvas-control-btn-div>*:not(:last-child) {
   margin-right: 0.5rem;
 }
 
