@@ -122,16 +122,14 @@
   position: relative;
 }
 
+/*  */
+
 .canvas {
   width: 100%;
   height: 100%;
   display: block;
   border: 1px solid #475569;
   cursor: pointer;
-
-  /* ✅ make sure canvas looks sharp */
-  object-fit: cover;
-  /* acts if image used as <img>, but we keep for consistency */
 }
 
 .resize_handler {

@@ -68,53 +68,18 @@ export default function CroppingTool() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const root = document.querySelector(".main_div") as HTMLElement;
-      const rootRect = root.getBoundingClientRect();
-      const canvasRect = canvas.getBoundingClientRect();
-
-      // -------- Cover logic --------
       const imgRatio = img.width / img.height;
-      const rootRatio = rootRect.width / rootRect.height;
+      const canvasRatio = canvas.width / canvas.height;
 
       let drawWidth, drawHeight, offsetX, offsetY;
 
-      if (rootRatio > imgRatio) {
-        // Root wider → fit height
-        drawHeight = rootRect.height;
-        drawWidth = img.width * (rootRect.height / img.height);
-        offsetX = (rootRect.width - drawWidth) / 2; // 👈 center horizontally
-        offsetY = 0;
-      } else {
-        // Root taller → fit width
-        drawWidth = rootRect.width;
-        drawHeight = img.height * (rootRect.width / img.width);
-        offsetX = 0;
-        offsetY = (rootRect.height - drawHeight) / 2; // 👈 center vertically
-      }
+      drawHeight = canvas.height;
+      drawWidth = imgRatio * drawHeight;
+      offsetX = (canvas.width - drawWidth) / 2;
+      offsetY = 0;
 
-      // -------- Canvas offset --------
-      const relX = canvasRect.left - rootRect.left;
-      const relY = canvasRect.top - rootRect.top;
+      ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
-      // -------- Crop portion --------
-      const sx = (relX - offsetX) * (img.width / drawWidth);
-      const sy = (relY - offsetY) * (img.height / drawHeight);
-      const sWidth = canvas.width * (img.width / drawWidth);
-      const sHeight = canvas.height * (img.height / drawHeight);
-
-      ctx.drawImage(
-        img,
-        sx,
-        sy,
-        sWidth,
-        sHeight,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-      // -------- Crop lines --------
       ctx.strokeStyle = "#000000e5";
       ctx.lineWidth = 6;
 
@@ -145,19 +110,12 @@ export default function CroppingTool() {
     if (!canvas) return;
 
     if (cropMode === "whole") {
-      // Export whole image
       const link = document.createElement("a");
       link.download = "cropped-image.png";
       link.href = canvas.toDataURL();
       link.click();
     } else if (cropMode === "split2") {
-      // Export two parts
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-
       const splitPoint = canvas.width * 0.85;
-
-      // Left part (85%)
       const leftCanvas = document.createElement("canvas");
       leftCanvas.width = splitPoint;
       leftCanvas.height = canvas.height;
@@ -179,8 +137,6 @@ export default function CroppingTool() {
         leftLink.href = leftCanvas.toDataURL();
         leftLink.click();
       }
-
-      // Right part (15%)
       const rightCanvas = document.createElement("canvas");
       rightCanvas.width = canvas.width - splitPoint;
       rightCanvas.height = canvas.height;
@@ -205,12 +161,7 @@ export default function CroppingTool() {
         }, 100);
       }
     } else if (cropMode === "split5") {
-      // Export five equal parts
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-
       const sectionWidth = canvas.width / 5;
-
       for (let i = 0; i < 5; i++) {
         const partCanvas = document.createElement("canvas");
         partCanvas.width = sectionWidth;
@@ -275,118 +226,122 @@ export default function CroppingTool() {
 
   return (
     <>
-    <div
-      className="main_div"
-      style={{
-        backgroundImage: `url(${currentImage || "/bg-image-default.jpg"})`,
-        backgroundAttachment: "fixed",
-      }}
-    >
-      {/* Navigation */}
-      <Navbar />
-  
-      <div className="wrapper_div">
-        <div style={{ width: "70%" }}>
-          <div className="upper_div">
-            <div
-              className="preview_image"
-              style={{
-                backgroundImage: `url(${currentImage || "/bg-image-default.jpg"})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundAttachment: "fixed",
-              }}
-            />
-  
-            <div style={{ flex: "1" }}>
-              <h1 className="main_heading">Background Cropper</h1>
-              <p className="sub_heading">Ver. 1.1</p>
-              <p className="input_heading">
-                Paste your background link or upload your background below.
-              </p>
-  
-              <div className="input_div">
-                <Input
-                  type="text"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="Enter image URL"
-                  className="input"
-                />
-                <Button
-                  onClick={() => fileInputRef.current?.click()}
-                  variant="outline"
-                  size="icon"
-                  className="upload_btn"
-                >
-                  <Upload className="upload_icon" />
-                </Button>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileUpload}
-                  style={{ display: "none" }}
-                />
-              </div>
-  
-              <div className="splitting_btn_div">
-                <Button
-                  onClick={() => setCropMode("whole")}
-                  variant={"outline"}
-                  size="icon"
-                  className="splitting_btn"
-                >
-                  <Square className="splitting_icon" />
-                </Button>
-                <Button
-                  onClick={() => setCropMode("split2")}
-                  variant={"outline"}
-                  size="icon"
-                  className="splitting_btn"
-                >
-                  <Columns2 className="splitting_icon" />
-                </Button>
-                <Button
-                  onClick={() => setCropMode("split5")}
-                  variant={"outline"}
-                  size="icon"
-                  className="splitting_btn"
-                >
-                  <Columns4 className="splitting_icon" />
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div className="canvas_outer_div">
-            <div className="canvas_wrapper">
-              {/* Canvas Controls */}
-              <div className="canvas-control-btn-div">
-                <Download onClick={exportImage} className="canvas-control-icons" />
-                <Maximize2 className="canvas-control-icons" />
-                <Star className="canvas-control-icons" />
-                <X className="canvas-control-icons" />
-              </div>
-  
-              {/* Canvas */}
-              <canvas
-                ref={canvasRef}
-                className="canvas"
-                style={{ height: `${canvasHeight}px` }}
+      <div
+        className="main_div"
+        style={{
+          backgroundImage: `url(${currentImage || "/bg-image-default.jpg"})`,
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <Navbar />
+        <div className="wrapper_div">
+          <div style={{ width: "70%" }}>
+            <div className="upper_div">
+              <div
+                className="preview_image"
+                style={{
+                  backgroundImage: `url(${currentImage || "/bg-image-default.jpg"})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundAttachment: "fixed",
+                }}
               />
-  
-              {/* Resize Handle */}
-              <div className="resize_handler" onMouseDown={handleMouseDown} />
+              <div style={{ flex: "1" }}>
+                <h1 className="main_heading">Background Cropper</h1>
+                <p className="sub_heading">Ver. 1.1</p>
+                <p className="input_heading">
+                  Paste your background link or upload your background below.
+                </p>
+                <div className="input_div">
+                  <Input
+                    type="text"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="Enter image URL"
+                    className="input"
+                  />
+                  <Button
+                    onClick={() => fileInputRef.current?.click()}
+                    variant="outline"
+                    size="icon"
+                    className="upload_btn"
+                  >
+                    <Upload className="upload_icon" />
+                  </Button>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    style={{ display: "none" }}
+                  />
+                </div>
+                <div className="splitting_btn_div">
+                  <Button
+                    onClick={() => setCropMode("whole")}
+                    variant={"outline"}
+                    size="icon"
+                    className="splitting_btn"
+                  >
+                    <Square className="splitting_icon" />
+                  </Button>
+                  <Button
+                    onClick={() => setCropMode("split2")}
+                    variant={"outline"}
+                    size="icon"
+                    className="splitting_btn"
+                  >
+                    <Columns2 className="splitting_icon" />
+                  </Button>
+                  <Button
+                    onClick={() => setCropMode("split5")}
+                    variant={"outline"}
+                    size="icon"
+                    className="splitting_btn"
+                  >
+                    <Columns4 className="splitting_icon" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div className="canvas_outer_div">
+              <div className="canvas_wrapper">
+                <div className="canvas-control-btn-div">
+                  <Download onClick={exportImage} className="canvas-control-icons" />
+                  <Maximize2 className="canvas-control-icons" />
+                  <Star className="canvas-control-icons" />
+                  <X className="canvas-control-icons" />
+                </div>
+                <div
+                  className="canvas-container"
+                  style={{
+                    height: `${canvasHeight}px`, /* Dynamic height */
+                    background: "transparent",
+                  }}
+                >
+                  <canvas
+                    ref={canvasRef}
+                    className="canvas"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      display: "block",
+                      background: "transparent",
+                    }}
+                  />
+                </div>
+                <div className="resize_handler" onMouseDown={handleMouseDown} />
+              </div>
             </div>
           </div>
-        </div>
-  
-        <div style={{ width: "30%" }}>
-          <SideBar exportImage={exportImage} />
+          <div style={{ width: "30%" }}>
+            <SideBar exportImage={exportImage} />
+          </div>
         </div>
       </div>
-    </div>
-    <Footer />
-  </>
+      <Footer />
+    </>
   );
-}
+} 
