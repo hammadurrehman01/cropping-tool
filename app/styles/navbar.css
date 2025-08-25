@@ -1,6 +1,6 @@
 .main_nav {
   background-color: #003040;
-  border-bottom: 1px solid #334155;
+  border-bottom: 2px solid #00c0ff;
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.75rem;
@@ -39,21 +39,26 @@
   display: flex;
   align-items: center;
   font-size: 0.875rem;
+  gap: 16px
 }
 
-.nav_items > *:not(:last-child) {
+/* .nav_items > *:not(:last-child) {
   margin-right: 1.5rem;
-}
+} */
 
 .home {
-  color: #22d3ee;
+  color: #00c0ff;
   cursor: pointer;
+  font-weight: bolder;
+  font-size: 16px;
 }
 
 .tools {
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .tools > *:not(:last-child) {
@@ -64,6 +69,9 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  color: #00c0ff;
 }
 
 .more > *:not(:last-child) {
@@ -71,7 +79,7 @@
 }
 
 .right_div {
-  color: #22d3ee;
+  color: #00c0ff;
   font-weight: 700;
-  font-size: 1.125rem;
+  font-size: 16px;
 }

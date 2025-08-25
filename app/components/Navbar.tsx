@@ -8,7 +8,7 @@ const Navbar = () => {
       <div className="sub_nav">
         <div className="left_div">
           <div className="logo">
-            <Image src="/logo.svg" alt="logo" height={30} width={30} />
+            <Image src="/logo.svg" alt="logo" height={24} width={24} />
           </div>
           <div className="nav_items">
             <span className="home">Home</span>
